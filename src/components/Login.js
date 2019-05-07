@@ -1,18 +1,11 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import logo from "../logo.svg";
+import "../App.css";
 import queryString from "query-string";
-import GoogleAuth from "./components/GoogleAuth";
-import GoogleLogout from "./components/GoogleLogout";
+import GoogleAuth from "./GoogleAuth";
+import GoogleLogout from "./GoogleLogout";
 
-class App extends Component {
-    componentWillMount() {
-        // var query = queryString.parse(this.props.location.search);
-        // if (query.token) {
-        //     window.localStorage.setItem("jwt", query.token);
-        //     this.props.history.push("/");
-        // }
-    }
+class Login extends Component {
 
     render() {
         return (
@@ -29,4 +22,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Login;
