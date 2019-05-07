@@ -1,30 +1,29 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import queryString from "query-string";
+import {Route, Switch} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import GoogleAuth from "./components/GoogleAuth";
 import GoogleLogout from "./components/GoogleLogout";
+import Login from "./components/Login";
+import MomentumContainer from "./containers/MomentumContainer";
+
+const Home = () => <GoogleLogout />;  // TODO Get rid of home and put logout button in app
+const Logout = () => <h1>Logout</h1>;  // TODO don't need this
+
 
 class App extends Component {
-    componentWillMount() {
-        // var query = queryString.parse(this.props.location.search);
-        // if (query.token) {
-        //     window.localStorage.setItem("jwt", query.token);
-        //     this.props.history.push("/");
-        // }
-    }
+
 
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to TickerAlert</h1>
-                </header>
-                <GoogleAuth />
-                <GoogleLogout />
-            </div>
-
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/" exact component={App} />
+                    <Route path="/Login" component={Login} />
+                    <Route path="/Home" component={Home} />
+                    <Route path="/Logout" exact component={Logout} />
+                    <Route path="/Momentum" exact component={MomentumContainer} />
+                </Switch>
+            </BrowserRouter>
         );
     }
 }
