@@ -8,18 +8,12 @@ import MomentumContainer from "./containers/MomentumContainer";
 import logo from "./logo.svg";
 
 
-
-
 class App extends Component {
-
 
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to TickerAlert</h1>
-                </header>
+            <div>
+                <h1>Welcome!</h1>
                 <GoogleAuth />
                 <GoogleLogout />
             </div>

@@ -1,33 +1,53 @@
+//import 'semantic-ui-css/semantic.min.css'
 import React from "react";
 import ReactDOM from "react-dom";
-
 import {Provider} from "react-redux";
 import {createStore, compose, applyMiddleware} from "redux";
-import ReduxThunk from "redux-thunk";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import thunk from "redux-thunk";
 import promise from 'redux-promise-middleware';
-import {createLogger} from "redux-logger";
+import logger from "redux-logger";
 import registerServiceWorker from "./registerServiceWorker";
+import configureStore from './store';
+
 import "./index.css";
 import App from "./App";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Login from "./components/Login";
+import reducers from './reducers';
 import MomentumContainer from "./containers/MomentumContainer";
-import GoogleLogout from "./components/GoogleLogout";
+import Navbar from "./components/Navbar";
 
 
-const Home = () => <GoogleLogout />;  // TODO Get rid of home and put logout button in app
-const Logout = () => <h1>Logout</h1>;  // TODO don't need this
+const { REACT_APP_DEV_MODE } = process.env;
+const dev_mode = JSON.stringify(REACT_APP_DEV_MODE) === JSON.stringify("true");
+const middleware = applyMiddleware(promise, thunk, logger);
 
+let store_dev;
+if (dev_mode === true) {
+    console.log('App starting in development mode.');
+    const allStoreEnhancers = compose(
+        middleware,
+        window.devToolsExtension && window.devToolsExtension()
+    );
+    store_dev = createStore(reducers, {}, allStoreEnhancers)
+} else {
+    console.log('App starting in production mode');
+}
+
+const store_production = createStore(reducers, {}, middleware);
+// const store = dev_mode ? store_dev : store_production;
+
+
+const store = store_production;
 ReactDOM.render(
-    <BrowserRouter>
-        <Switch>
-            <Route path="/" exact component={App} />
-            <Route path="/Login" component={Login} />
-            <Route path="/Home" component={Home} />
-            <Route path="/Logout" exact component={Logout} />
-            <Route path="/Momentum" exact component={MomentumContainer} />
-        </Switch>
-    </BrowserRouter>,
+    <Provider store={store}>
+        <BrowserRouter>
+            <Navbar/>
+            <Switch>
+                <Route path="/" exact component={App} />
+                <Route path="/Momentum" exact component={MomentumContainer} />
+            </Switch>
+        </BrowserRouter>
+    </Provider>,
 	document.getElementById("root")
 );
 registerServiceWorker();
