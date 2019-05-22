@@ -4,8 +4,12 @@ class GoogleAuth extends Component {
 
     render() {
         return (
-            <a href="http://localhost:4500/auth/google" className="button">
-                <div>
+            <div style={{
+                maxWidth: '180px',
+                color: 'white',
+                bottomPadding: '5px'}}>
+                <a href="http://localhost:4500/auth/google" className="button">
+                    <div>
             <span className="svgIcon t-popup-svg">
               <svg
                   className="svgIcon-use"
@@ -33,9 +37,10 @@ class GoogleAuth extends Component {
                 </g>
               </svg>
             </span>
-                    <span className="button-label">Sign in with Google</span>
-                </div>
-            </a>
+                        <span className="button-label">Sign in with Google</span>
+                    </div>
+                </a>
+            </div>
         )
     }
 }

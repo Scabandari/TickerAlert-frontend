@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {SIGN_IN_ENDPOINT, SIGN_OUT_ENDPOINT} from "../constants";
 
 const styles = {
     root: {
@@ -22,7 +23,10 @@ const styles = {
 };
 
 function Navbar(props) {
-    const { classes } = props;
+    const { classes, url, signedIn } = props;
+    const endPoint = signedIn ? SIGN_OUT_ENDPOINT : SIGN_IN_ENDPOINT;
+    const label = signedIn ? "Sign Out" : "Sign In";
+
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -33,7 +37,9 @@ function Navbar(props) {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         TickerAlert
                     </Typography>
-                    <Button color="inherit">Logout</Button>
+                    <a style={{color: "white"}} href={url + endPoint}>
+                        <Button color="inherit">{label}</Button>
+                    </a>
                 </Toolbar>
             </AppBar>
         </div>
