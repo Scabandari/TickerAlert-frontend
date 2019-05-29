@@ -49,12 +49,20 @@ function getSorting(order, orderBy) {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+// const rows = [
+//     { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
+//     { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
+//     { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+//     { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+//     { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+// ];
+
 const rows = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-    { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-    { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-    { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-    { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Ticker' },
+    { id: '1hr', numeric: true, disablePadding: false, label: '1hr' },
+    { id: '15min', numeric: true, disablePadding: false, label: '15min' },
+    { id: '5min', numeric: true, disablePadding: false, label: '5min' },
+    { id: '1min', numeric: true, disablePadding: false, label: '1min' },
 ];
 
 
@@ -158,7 +166,7 @@ let EnhancedTableToolbar = props => {
                     </Typography>
                 ) : (
                     <Typography variant="h6" id="tableTitle">
-                        Nutrition
+                        Momentum
                     </Typography>
                 )}
             </div>
@@ -205,7 +213,7 @@ const styles = theme => ({
 class EnhancedTable extends React.Component {
     state = {
         order: 'asc',
-        orderBy: 'calories',
+        orderBy: '1hr',
         selected: [],
         // data: [
         //     createData('Cupcake', 305, 3.7, 67, 4.3),
@@ -317,10 +325,10 @@ class EnhancedTable extends React.Component {
                                             <TableCell component="th" scope="row" padding="none">
                                                 {n.name}
                                             </TableCell>
-                                            <TableCell align="right">{n.calories}</TableCell>
-                                            <TableCell align="right">{n.fat}</TableCell>
-                                            <TableCell align="right">{n.carbs}</TableCell>
-                                            <TableCell align="right">{n.protein}</TableCell>
+                                            <TableCell align="right">{n.hr}</TableCell>
+                                            <TableCell align="right">{n.min15}</TableCell>
+                                            <TableCell align="right">{n.min5}</TableCell>
+                                            <TableCell align="right">{n.min}</TableCell>
                                         </TableRow>
                                     );
                                 })}
