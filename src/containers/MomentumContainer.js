@@ -41,10 +41,10 @@ class MomentumContainer extends Component {
         for (const ticker of tickers.data) {
             const momentum = this.createData(
                 ticker.name,
-                ticker.momentum.hr,
-                ticker.momentum.min15,
-                ticker.momentum.min5,
-                ticker.momentum.min);
+                ticker.momentum.month,
+                ticker.momentum.week,
+                ticker.momentum.day,
+                ticker.momentum.hr);
 
             //console.log(`momentum: ${JSON.stringify(momentum)}`);
             this.setState(prevState => {
@@ -58,11 +58,11 @@ class MomentumContainer extends Component {
         //console.log(`this.state: ${JSON.stringify(this.state)}`);
     }
 
-    createData(name, hr, min15, min5, min) {
+    createData(name, month, week, day, hour) {
         this.setState(prevState => {
             prevState.counter += 1
         });
-        return { id: this.state.counter, name, hr, min15, min5, min };
+        return { id: this.state.counter, name, month, week, day, hour };
     }
 
     render() {
