@@ -19,10 +19,3 @@ export const setServer = endpoint => dispatch => {
        payload: endpoint
     });
 };
-
-export const allTickers = tickers => dispatch => {
-    dispatch({
-        type: ALL_TICKERS,
-        payload: tickers
-    })
-};
