@@ -23,7 +23,17 @@ const styles = {
 };
 
 function Navbar(props) {
-    const { classes, url, signedIn } = props;
+    const {
+        REACT_APP_DEV_MODE,
+        REACT_APP_DEV_SERVER_ENDPOINT,
+        REACT_APP_PROD_SERVER_ENDPOINT
+    } = process.env;
+    const dev_mode = JSON.stringify(REACT_APP_DEV_MODE) === JSON.stringify("true");
+
+    const url = dev_mode ? REACT_APP_DEV_SERVER_ENDPOINT: REACT_APP_PROD_SERVER_ENDPOINT;
+    console.log(`url: ${url}`);
+    // const { classes, url, signedIn } = props;
+    const { classes, signedIn } = props;
     const endPoint = signedIn ? SIGN_OUT_ENDPOINT : SIGN_IN_ENDPOINT;
     const label = signedIn ? "Sign Out" : "Sign In";
 

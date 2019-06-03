@@ -93,7 +93,7 @@ class MomentumContainer extends Component {
     }
 
     render() {
-        console.log(`this.props: ${JSON.stringify(this.props, null, 2)}`);
+        //console.log(`this.props: ${JSON.stringify(this.props, null, 2)}`);
 
         return (
             <div style={{'paddingLeft': '8px', 'paddingRight': '8px'}}>

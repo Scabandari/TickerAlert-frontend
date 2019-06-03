@@ -270,8 +270,8 @@ class EnhancedTable extends React.Component {
     render() {
         const { classes, data, key_ } = this.props;
 
-        console.log(`data: ${JSON.stringify(data, null, 2)}`);
-        console.log(`key: ${key_}`);
+        // console.log(`data: ${JSON.stringify(data, null, 2)}`);
+        // console.log(`key: ${key_}`);
         // const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
         // const { order, orderBy, selected, rowsPerPage, page } = this.state;
         const { order, orderBy, rowsPerPage, page } = this.state;
