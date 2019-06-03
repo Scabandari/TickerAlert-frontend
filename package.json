@@ -5,14 +5,18 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "@material-ui/styles": "^4.0.1",
     "ajv": "^6.10.0",
     "axios": "^0.18.0",
+    "classnames": "latest",
     "debug": "^4.1.1",
+    "material-ui": "^1.0.0-beta.47",
     "materialize-css": "^1.0.0-rc.2",
     "prop-types": "^15.7.2",
     "query-string": "^6.5.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-radio-group": "^3.0.3",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "1.1.4",
@@ -21,8 +25,7 @@
     "redux-promise": "^0.6.0",
     "redux-promise-middleware": "^6.1.0",
     "redux-thunk": "^2.3.0",
-    "semantic-ui-react": "^0.87.1",
-    "classnames": "latest"
+    "semantic-ui-react": "^0.87.1"
   },
   "scripts": {
     "start": "react-scripts start",

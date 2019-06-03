@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-//import { bindActionCreators } from 'redux'
 import queryString from 'query-string';
 import MomentumTable from '../components/MomentumTable';
-import { signIn } from "../actions";
+import RadioButton from '../components/RadioButton';
+import PaperSheet from '../components/PaperSheet';
+import { signIn, toggleMomentum } from "../actions";
 
 
 class MomentumContainer extends Component {
@@ -20,6 +21,7 @@ class MomentumContainer extends Component {
         };
 
         this.createData = this.createData.bind(this);
+        this.toggleMomentum = this.toggleMomentum.bind(this);
         //this.fetchMomentum = this.fetchMomentum.bind(this);
         //this.fetchTimeFrames = this.fetchTimeFrames.bind(this);
     }
@@ -35,16 +37,18 @@ class MomentumContainer extends Component {
     }
 
     async componentDidMount() {
+        const closeOrVolume = this.props.momentumToggle.closeOrVolume;
         const base_endpoint = this.props.server.serverEndpoint;
         const tickers_endpoint = `${base_endpoint}tickers`;
         const tickers = await axios.get(tickers_endpoint);
         for (const ticker of tickers.data) {
             const momentum = this.createData(
                 ticker.name,
-                ticker.momentum.month,
-                ticker.momentum.week,
-                ticker.momentum.day,
-                ticker.momentum.hr);
+                ticker.momentum.month[closeOrVolume],
+                ticker.momentum.week[closeOrVolume],
+                ticker.momentum.day[closeOrVolume],
+                ticker.momentum.hr[closeOrVolume]
+            );
 
             //console.log(`momentum: ${JSON.stringify(momentum)}`);
             this.setState(prevState => {
@@ -58,6 +62,10 @@ class MomentumContainer extends Component {
         //console.log(`this.state: ${JSON.stringify(this.state)}`);
     }
 
+    toggleMomentum(value) {
+        this.props.toggleMomentum(value);
+    }
+
     createData(name, month, week, day, hour) {
         this.setState(prevState => {
             prevState.counter += 1
@@ -69,19 +77,24 @@ class MomentumContainer extends Component {
 
         return (
             <div style={{'paddingLeft': '8px', 'paddingRight': '8px'}}>
-                <MomentumTable data={this.state.chartData} />
+
+                <PaperSheet>
+                    <RadioButton toggle={this.toggleMomentum}/>
+                    <MomentumTable data={this.state.chartData} />
+                </PaperSheet>
+
             </div>
         )
     }
 }
 
 
-const mapStateToProps = ({server, allTickers}) => {
-    return {server, allTickers};
+const mapStateToProps = ({server, momentumToggle}) => {
+    return {server, momentumToggle};
 };
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({signIn}, dispatch)
+    return bindActionCreators({signIn, toggleMomentum}, dispatch)
 };
 
 
