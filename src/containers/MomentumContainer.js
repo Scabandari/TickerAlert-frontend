@@ -37,17 +37,17 @@ class MomentumContainer extends Component {
     }
 
     async componentDidMount() {
-        const closeOrVolume = this.props.momentumToggle.closeOrVolume;
+        //const closeOrVolume = this.props.momentumToggle.closeOrVolume;
         const base_endpoint = this.props.server.serverEndpoint;
         const tickers_endpoint = `${base_endpoint}tickers`;
         const tickers = await axios.get(tickers_endpoint);
         for (const ticker of tickers.data) {
             const momentum = this.createData(
                 ticker.name,
-                ticker.momentum.month[closeOrVolume],
-                ticker.momentum.week[closeOrVolume],
-                ticker.momentum.day[closeOrVolume],
-                ticker.momentum.hr[closeOrVolume]
+                ticker.momentum.month,
+                ticker.momentum.week,
+                ticker.momentum.day,
+                ticker.momentum.hr
             );
 
             //console.log(`momentum: ${JSON.stringify(momentum)}`);
@@ -70,17 +70,37 @@ class MomentumContainer extends Component {
         this.setState(prevState => {
             prevState.counter += 1
         });
-        return { id: this.state.counter, name, month, week, day, hour };
+        return {
+            id: this.state.counter,
+            name,
+            month: {
+                close: month.close,
+                volume: month.volume
+            },
+            week: {
+                close: week.close,
+                volume: week.volume
+            },
+            day: {
+                close: day.close,
+                volume: day.volume
+            },
+            hour: {
+                close: hour.close,
+                volume: hour.volume
+            }
+        };
     }
 
     render() {
+        console.log(`this.props: ${JSON.stringify(this.props, null, 2)}`);
 
         return (
             <div style={{'paddingLeft': '8px', 'paddingRight': '8px'}}>
 
                 <PaperSheet>
                     <RadioButton toggle={this.toggleMomentum}/>
-                    <MomentumTable data={this.state.chartData} />
+                    <MomentumTable key_={this.props.momentumToggle.closeOrVolume} data={this.state.chartData} />
                 </PaperSheet>
 
             </div>

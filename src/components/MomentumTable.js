@@ -268,8 +268,10 @@ class EnhancedTable extends React.Component {
     //isSelected = id => this.state.selected.indexOf(id) !== -1;
 
     render() {
-        const { classes, data } = this.props;
-        //console.log(`data: ${JSON.stringify(data, null, 2)}`);
+        const { classes, data, key_ } = this.props;
+
+        console.log(`data: ${JSON.stringify(data, null, 2)}`);
+        console.log(`key: ${key_}`);
         // const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
         // const { order, orderBy, selected, rowsPerPage, page } = this.state;
         const { order, orderBy, rowsPerPage, page } = this.state;
@@ -306,10 +308,10 @@ class EnhancedTable extends React.Component {
                                             <TableCell component="th" scope="row" padding="default">
                                                 {n.name}
                                             </TableCell>
-                                            <TableCell align="right">{n.month}</TableCell>
-                                            <TableCell align="right">{n.week}</TableCell>
-                                            <TableCell align="right">{n.day}</TableCell>
-                                            <TableCell align="right">{n.hour}</TableCell>
+                                            <TableCell align="right">{n.month[key_]}</TableCell>
+                                            <TableCell align="right">{n.week[key_]}</TableCell>
+                                            <TableCell align="right">{n.day[key_]}</TableCell>
+                                            <TableCell align="right">{n.hour[key_]}</TableCell>
                                         </TableRow>
                                     );
                                 })}
