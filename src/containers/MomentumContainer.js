@@ -39,9 +39,12 @@ class MomentumContainer extends Component {
     async componentDidMount() {
         //const closeOrVolume = this.props.momentumToggle.closeOrVolume;
         const base_endpoint = this.props.server.serverEndpoint;
+        console.log(`base_endpoint: ${base_endpoint}`);
         const tickers_endpoint = `${base_endpoint}tickers`;
         const tickers = await axios.get(tickers_endpoint);
+        console.log(`tickers: ${JSON.stringify(tickers, null, 2)}`);
         for (const ticker of tickers.data) {
+            //console.log(`ticker: ${JSON.stringify(ticker, null, 1)}`);
             const momentum = this.createData(
                 ticker.name,
                 ticker.momentum.month,
