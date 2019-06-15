@@ -39,7 +39,7 @@ function Navbar(props) {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         TickerAlert
                     </Typography>
-                    <a style={{color: "white"}} href={url + endPoint}>
+                    <a style={{color: "white"}} href={endPoint}>
                         <Button color="inherit">{label}</Button>
                     </a>
                 </Toolbar>

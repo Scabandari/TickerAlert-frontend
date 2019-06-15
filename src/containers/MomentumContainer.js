@@ -33,7 +33,10 @@ class MomentumContainer extends Component {
         const user_id = loc_search.user_id;
         //console.log(user_id);
         //this.props.dispatch(signIn(user_id));
-        this.props.signIn(user_id);
+        if(user_id !== undefined) {
+            this.props.signIn(user_id);
+        }
+
     }
 
     async componentDidMount() {
@@ -41,7 +44,8 @@ class MomentumContainer extends Component {
         const base_endpoint = this.props.server.serverEndpoint;
         console.log(`base_endpoint: ${base_endpoint}`);
         //const tickers_endpoint = `${base_endpoint}tickers`;
-        const tickers_endpoint = `http://localhost:300/tickers`;
+        //const tickers_endpoint = `http://localhost:300/tickers`;
+        const tickers_endpoint = `/tickers`;
         const tickers = await axios.get(tickers_endpoint);
         console.log(`tickers: ${JSON.stringify(tickers, null, 2)}`);
         for (const ticker of tickers.data) {

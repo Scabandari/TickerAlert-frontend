@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": {
-    "/tickers/*": {
+    "/tickers": {
       "target": "http://ec2-52-15-220-86.us-east-2.compute.amazonaws.com:4500"
     },
     "/auth/google": {
