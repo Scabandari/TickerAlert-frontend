@@ -59,10 +59,10 @@ function getSorting(order, orderBy) {
 
 const rows = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Ticker' },
-    { id: 'month', numeric: true, disablePadding: false, label: 'Monthly' },
-    { id: 'week', numeric: true, disablePadding: false, label: 'Weekly' },
-    { id: 'day', numeric: true, disablePadding: false, label: 'Daily' },
-    { id: 'hour', numeric: true, disablePadding: false, label: 'Hourly' },
+    { id: 'month', numeric: true, disablePadding: false, label: 'Monthly%' },
+    { id: 'week', numeric: true, disablePadding: false, label: 'Weekly%' },
+    { id: 'day', numeric: true, disablePadding: false, label: 'Daily%' },
+    { id: 'hour', numeric: true, disablePadding: false, label: 'Hourly%' },
 
     // { id: '15min', numeric: true, disablePadding: false, label: 'Monthly' },
     // { id: '5min', numeric: true, disablePadding: false, label: 'Weekly' },
@@ -83,13 +83,6 @@ class EnhancedTableHead extends React.Component {
         return (
             <TableHead>
                 <TableRow>
-                    {/*<TableCell padding="checkbox">*/}
-                        {/*<Checkbox*/}
-                            {/*indeterminate={numSelected > 0 && numSelected < rowCount}*/}
-                            {/*checked={numSelected === rowCount}*/}
-                            {/*onChange={onSelectAllClick}*/}
-                        {/*/>*/}
-                    {/*</TableCell>*/}
                     {rows.map(
                         row => (
                             <TableCell
@@ -122,9 +115,9 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
+    //numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
+    //onSelectAllClick: PropTypes.func.isRequired,
     order: PropTypes.string.isRequired,
     orderBy: PropTypes.string.isRequired,
     rowCount: PropTypes.number.isRequired,
@@ -155,6 +148,7 @@ const toolbarStyles = theme => ({
     },
 });
 
+// TODO why is this let?
 let EnhancedTableToolbar = props => {
     const { numSelected, classes } = props;
 
@@ -197,7 +191,7 @@ let EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
     classes: PropTypes.object.isRequired,
-    numSelected: PropTypes.number.isRequired,
+    //numSelected: PropTypes.number.isRequired,
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
@@ -274,8 +268,10 @@ class EnhancedTable extends React.Component {
     //isSelected = id => this.state.selected.indexOf(id) !== -1;
 
     render() {
-        const { classes, data } = this.props;
-        //console.log(`data: ${JSON.stringify(data, null, 2)}`);
+        const { classes, data, key_ } = this.props;
+
+        // console.log(`data: ${JSON.stringify(data, null, 2)}`);
+        // console.log(`key: ${key_}`);
         // const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
         // const { order, orderBy, selected, rowsPerPage, page } = this.state;
         const { order, orderBy, rowsPerPage, page } = this.state;
@@ -312,10 +308,10 @@ class EnhancedTable extends React.Component {
                                             <TableCell component="th" scope="row" padding="default">
                                                 {n.name}
                                             </TableCell>
-                                            <TableCell align="right">{n.month}</TableCell>
-                                            <TableCell align="right">{n.week}</TableCell>
-                                            <TableCell align="right">{n.day}</TableCell>
-                                            <TableCell align="right">{n.hour}</TableCell>
+                                            <TableCell align="right">{n.month[key_]}</TableCell>
+                                            <TableCell align="right">{n.week[key_]}</TableCell>
+                                            <TableCell align="right">{n.day[key_]}</TableCell>
+                                            <TableCell align="right">{n.hour[key_]}</TableCell>
                                         </TableRow>
                                     );
                                 })}

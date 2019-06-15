@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-//import { bindActionCreators } from 'redux'
 import queryString from 'query-string';
 import MomentumTable from '../components/MomentumTable';
-import { signIn } from "../actions";
+import RadioButton from '../components/RadioButton';
+import PaperSheet from '../components/PaperSheet';
+import { signIn, toggleMomentum } from "../actions";
 
 
 class MomentumContainer extends Component {
@@ -20,6 +21,7 @@ class MomentumContainer extends Component {
         };
 
         this.createData = this.createData.bind(this);
+        this.toggleMomentum = this.toggleMomentum.bind(this);
         //this.fetchMomentum = this.fetchMomentum.bind(this);
         //this.fetchTimeFrames = this.fetchTimeFrames.bind(this);
     }
@@ -31,20 +33,30 @@ class MomentumContainer extends Component {
         const user_id = loc_search.user_id;
         //console.log(user_id);
         //this.props.dispatch(signIn(user_id));
-        this.props.signIn(user_id);
+        if(user_id !== undefined) {
+            this.props.signIn(user_id);
+        }
+
     }
 
     async componentDidMount() {
+        //const closeOrVolume = this.props.momentumToggle.closeOrVolume;
         const base_endpoint = this.props.server.serverEndpoint;
-        const tickers_endpoint = `${base_endpoint}tickers`;
+        console.log(`base_endpoint: ${base_endpoint}`);
+        //const tickers_endpoint = `${base_endpoint}tickers`;
+        //const tickers_endpoint = `http://localhost:300/tickers`;
+        const tickers_endpoint = `/tickers`;
         const tickers = await axios.get(tickers_endpoint);
+        console.log(`tickers: ${JSON.stringify(tickers, null, 2)}`);
         for (const ticker of tickers.data) {
+            //console.log(`ticker: ${JSON.stringify(ticker, null, 1)}`);
             const momentum = this.createData(
                 ticker.name,
                 ticker.momentum.month,
                 ticker.momentum.week,
                 ticker.momentum.day,
-                ticker.momentum.hr);
+                ticker.momentum.hr
+            );
 
             //console.log(`momentum: ${JSON.stringify(momentum)}`);
             this.setState(prevState => {
@@ -58,30 +70,59 @@ class MomentumContainer extends Component {
         //console.log(`this.state: ${JSON.stringify(this.state)}`);
     }
 
+    toggleMomentum(value) {
+        this.props.toggleMomentum(value);
+    }
+
     createData(name, month, week, day, hour) {
         this.setState(prevState => {
             prevState.counter += 1
         });
-        return { id: this.state.counter, name, month, week, day, hour };
+        return {
+            id: this.state.counter,
+            name,
+            month: {
+                close: month.close,
+                volume: month.volume
+            },
+            week: {
+                close: week.close,
+                volume: week.volume
+            },
+            day: {
+                close: day.close,
+                volume: day.volume
+            },
+            hour: {
+                close: hour.close,
+                volume: hour.volume
+            }
+        };
     }
 
     render() {
+        //console.log(`this.props: ${JSON.stringify(this.props, null, 2)}`);
 
         return (
             <div style={{'paddingLeft': '8px', 'paddingRight': '8px'}}>
-                <MomentumTable data={this.state.chartData} />
+
+                <PaperSheet>
+                    <RadioButton toggle={this.toggleMomentum}/>
+                    <MomentumTable key_={this.props.momentumToggle.closeOrVolume} data={this.state.chartData} />
+                </PaperSheet>
+
             </div>
         )
     }
 }
 
 
-const mapStateToProps = ({server, allTickers}) => {
-    return {server, allTickers};
+const mapStateToProps = ({server, momentumToggle}) => {
+    return {server, momentumToggle};
 };
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({signIn}, dispatch)
+    return bindActionCreators({signIn, toggleMomentum}, dispatch)
 };
 
 

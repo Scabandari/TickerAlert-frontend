@@ -13,7 +13,7 @@ import "./index.css";
 import App from "./App";
 import reducers from './reducers';
 import MomentumContainer from "./containers/MomentumContainer";
-import NavbarContainer from "./containers/NavbarContainer";
+import NavBarContainer from "./containers/NavBarContainer";
 import AssetListContainer from "./containers/AssetListContainer";
 import MomentumTable from './components/MomentumTable';
 
@@ -41,7 +41,7 @@ const store = dev_mode ? store_dev : store_production;
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <NavbarContainer/>
+            <NavBarContainer/>
             <Switch>
                 <Route path="/" exact component={App} />
                 <Route path="/Momentum" exact component={MomentumContainer} />

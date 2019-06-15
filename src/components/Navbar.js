@@ -23,7 +23,9 @@ const styles = {
 };
 
 function Navbar(props) {
+
     const { classes, url, signedIn } = props;
+    //const { classes, signedIn } = props;
     const endPoint = signedIn ? SIGN_OUT_ENDPOINT : SIGN_IN_ENDPOINT;
     const label = signedIn ? "Sign Out" : "Sign In";
 
@@ -37,7 +39,7 @@ function Navbar(props) {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         TickerAlert
                     </Typography>
-                    <a style={{color: "white"}} href={url + endPoint}>
+                    <a style={{color: "white"}} href={endPoint}>
                         <Button color="inherit">{label}</Button>
                     </a>
                 </Toolbar>
