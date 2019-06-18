@@ -45,8 +45,8 @@ class MomentumContainer extends Component {
         console.log(`base_endpoint: ${base_endpoint}`);
         //const tickers_endpoint = `${base_endpoint}tickers`;
         //const tickers_endpoint = `http://localhost:300/tickers`;
-        const tickers_endpoint = `/tickers`;
-        const tickers = await axios.get(tickers_endpoint);
+        const tickers_endpoint = `tickers`;
+        const tickers = await axios.get(base_endpoint + tickers_endpoint);
         console.log(`tickers: ${JSON.stringify(tickers, null, 2)}`);
         for (const ticker of tickers.data) {
             //console.log(`ticker: ${JSON.stringify(ticker, null, 1)}`);
