@@ -1,0 +1,16 @@
+
+> core-js@2.6.9 postinstall /home/ryan/WebstormProjects/react-nodejs-passport-app/node_modules/babel-register/node_modules/core-js
+> node scripts/postinstall || echo "ignore"
+
+[96mThank you for using core-js ([94m https://github.com/zloirock/core-js [96m) for polyfilling JavaScript standard library![0m
+
+[96mThe project needs your help! Please consider supporting of core-js on Open Collective or Patreon: [0m
+[96m>[94m https://opencollective.com/core-js [0m
+[96m>[94m https://www.patreon.com/zloirock [0m
+
+[96mAlso, the author of core-js ([94m https://github.com/zloirock [96m) is looking for a good job -)[0m
+
++ react-scripts@1.1.4
+added 70 packages from 58 contributors, removed 94 packages, updated 224 packages, moved 21 packages and audited 14179 packages in 39.94s
+found 43 vulnerabilities (29 low, 8 moderate, 6 high)
+  run `npm audit fix` to fix them, or `npm audit` for details

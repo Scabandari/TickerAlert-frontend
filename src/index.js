@@ -43,7 +43,7 @@ ReactDOM.render(
         <BrowserRouter>
             <NavBarContainer/>
             <Switch>
-                <Route path="/" exact component={App} />
+                <Route path="/" exact component={MomentumContainer} />
                 <Route path="/Momentum" exact component={MomentumContainer} />
                 <Route path="/AssetList" exact component={AssetListContainer} />
                 <Route path="/MomentumTable" exact component={MomentumTable} />
