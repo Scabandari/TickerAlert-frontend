@@ -7,7 +7,7 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^4.0.1",
     "ajv": "^6.10.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "classnames": "latest",
     "debug": "^4.1.1",
     "http-proxy-middleware": "^0.19.1",
